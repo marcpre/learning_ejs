@@ -5,14 +5,11 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
-const auth = require('./routes/auth')
-const index = require('./routes/index')
-
 const app = express()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'hbs')
+app.set('view engine', 'ejs')
 app.use(logger(process.env.LOG_ENV))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -22,14 +19,9 @@ app.use(express.static(path.join(__dirname, '/../public')))
 app.use(cookieParser())
 
 // routes
-// index page 
-app.get('/', function(req, res) {
+// index page
+app.get('/', (req, res) => {
   res.render('pages/index')
-})
-
-// about page 
-app.get('/about', function(req, res) {
-  res.render('pages/about')
 })
 
 // Start Server
